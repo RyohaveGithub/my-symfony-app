@@ -2,26 +2,26 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HelloController 
+class HelloController extends AbstractController
 {
    /**
      * @Route("/hello",name="hello")
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $result = <<< EOM
-        <html>
-        <head><title>Hello</title></head>
-        <body>
-        <h1>Hello Symfony!</h1>
-        <p>this is symfomy sample page.</p>
-        </body>
-        </html>
-    EOM;
+        $name = $request->get('name');
+        $pass = $request->get('pass');
+        $result = '<html><body><ol>';
+        $result .='<h1>Parameter</h1>';
+        $result .='<p>name:' . $name . '</p>';
+        $result .='<p>pass:' . $pass . '</p>';
+        $result .='</html></body>';
         return new Response($result);
     }
 }
