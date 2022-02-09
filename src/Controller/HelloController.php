@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController extends AbstractController
@@ -13,15 +15,13 @@ class HelloController extends AbstractController
      * @Route("/hello",name="hello")
      */
 
-    public function index(Request $request)
+    public function index(Request $request ,LoggerInterface $logger)
     {
-        $name = $request->get('name');
-        $pass = $request->get('pass');
-        $result = '<html><body><ol>';
-        $result .='<h1>Parameter</h1>';
-        $result .='<p>name:' . $name . '</p>';
-        $result .='<p>pass:' . $pass . '</p>';
-        $result .='</html></body>';
-        return new Response($result);
+        $data = array(
+            'name'=>array('first'=>'Taro','second'=>'Yamada'),
+            'age'=>36,'maill'=>'taro@yamada.kun'
+        );
+        $logger->info(serialize($data));
+        return new JsonResponse($data);
     }
 }
