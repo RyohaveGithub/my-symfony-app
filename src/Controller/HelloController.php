@@ -46,7 +46,7 @@ class HelloController extends AbstractController
     }
 }
 //  データクラス
-    class MyData{
+    class MyData    {
         protected $data = "";
       
         public function getData(){
