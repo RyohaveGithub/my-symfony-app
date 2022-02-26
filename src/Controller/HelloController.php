@@ -59,4 +59,3 @@ class HelloController extends AbstractController
         }
 
     }
-    
